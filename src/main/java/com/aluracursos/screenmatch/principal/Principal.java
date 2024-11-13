@@ -106,11 +106,21 @@ public class Principal {
 //        }else {
 //            System.out.println("Episodio no encontrado ");
 //        }
+        // Muestra evaluaciones de todas las temporadas
         Map<Integer, Double> evaluacionesPorTemporada = episodios.stream()
                 .filter(e -> e.getEvalucion() > 0.0)
                 .collect(Collectors.groupingBy(Episodio::getTemporada,
                         Collectors.averagingDouble(Episodio::getEvalucion)));
         System.out.println(evaluacionesPorTemporada);
+
+        //Calcular estadísticas de las evaluaciones de los episodios
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getEvalucion() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getEvalucion));
+        System.out.println("Media de las evaluaciones: " + est.getAverage());
+        System.out.println("Episodio mejor evaluado: " + est.getMax());
+        System.out.println("Episodio peor evaluado: " + est.getMin());
+        System.out.println("Cantidad " + est.getCount());
     }
 
 }
