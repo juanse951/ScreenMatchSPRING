@@ -24,6 +24,6 @@ public enum Categoria {
                 return categoria;
             }
         }
-        throw new IllegalAccessException("Ninguna categoria encontrada: " + text);
+        throw new IllegalArgumentException("Ninguna categoria encontrada: " + text);
     }
 }
