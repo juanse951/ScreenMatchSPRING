@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatch.model;
 
+import com.aluracursos.screenmatch.service.ConsultaChatGPT;
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 import java.util.Optional;
