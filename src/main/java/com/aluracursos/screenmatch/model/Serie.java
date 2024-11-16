@@ -4,6 +4,7 @@ import com.aluracursos.screenmatch.service.ConsultaChatGPT;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
@@ -30,6 +31,9 @@ public class Serie {
     private  String poster;
 
     private  String actores;
+
+    @Transient
+    private List<Episodio> episodios;
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
