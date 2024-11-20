@@ -32,7 +32,7 @@ public class Serie {
 
     private  String actores;
 
-    @Transient
+    @OneToMany(mappedBy = "serie")
     private List<Episodio> episodios;
 
     public Serie(){}
@@ -120,5 +120,13 @@ public class Serie {
 
     public void setActores(String actores) {
         this.actores = actores;
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        this.episodios = episodios;
     }
 }
