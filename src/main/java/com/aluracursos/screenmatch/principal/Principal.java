@@ -39,6 +39,7 @@ public class Principal {
                     4 - Buscar series por titulo
                     5 - Top 5 mejores series
                     6 - Buscar series por categoria
+                    7 - Filtrar series
                                   
                     0 - Salir
                     """;
@@ -64,6 +65,9 @@ public class Principal {
                     break;
                 case 6:
                     buscarSeriesPorCategoria();
+                    break;
+                case 7:
+                    filtrarSeriesPorTemporadaYEvaluacion();
                     break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -97,7 +101,7 @@ public class Principal {
 
             List<DatosTemporadas> temporadas = new ArrayList<>();
 
-            for (int i = 1; i <= serieEncontrada.getTotalDeTemporadas(); i++) {
+            for (int i = 1; i <= serieEncontrada.getTotalTemporadas(); i++) {
                 var json = consumoApi.obtenerDatos(URL_BASE + serieEncontrada.getTitulo().replace(" ", "+") + "&season=" + i + API_KEY);
                 DatosTemporadas datosTemporada = conversor.obtenerDatos(json, DatosTemporadas.class);
                 temporadas.add(datosTemporada);
@@ -160,5 +164,18 @@ public class Principal {
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
         System.out.println("Las series de la categoria: " + genero);
         seriesPorCategoria.forEach(System.out::println);
+    }
+
+    private void filtrarSeriesPorTemporadaYEvaluacion(){
+        System.out.println("¿Con cuantas temporadas deseas filtrar tu serie? ");
+        var totalTemporadas = teclado.nextInt();
+        teclado.nextLine();
+        System.out.println("¿Con que evaluación? ");
+        var evaluacion = teclado.nextDouble();
+        teclado.nextLine();
+
+        List<Serie> filtroSeries = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalTemporadas, evaluacion);
+        System.out.println("*** Series Filtradas ***");
+        filtroSeries.forEach(s -> System.out.println(s.getTitulo() + " - evaluación: " + s.getEvaluacion()));
     }
 }

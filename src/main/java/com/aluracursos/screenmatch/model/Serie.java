@@ -1,11 +1,8 @@
 package com.aluracursos.screenmatch.model;
 
-import com.aluracursos.screenmatch.service.ConsultaChatGPT;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.OptionalDouble;
 
 @Entity
@@ -19,7 +16,7 @@ public class Serie {
     @Column(unique = true)
     private String titulo;
 
-    private Integer totalDeTemporadas;
+    private Integer totalTemporadas;
 
     private  Double evaluacion;
 
@@ -39,7 +36,7 @@ public class Serie {
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
-        this.totalDeTemporadas = datosSerie.totalDeTemporadas();
+        this.totalTemporadas = datosSerie.totalDeTemporadas();
         this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
         this.sinopsis = datosSerie.sinopsis();
@@ -51,7 +48,7 @@ public class Serie {
     public String toString() {
         return  "genero=" + genero +
                 "titulo='" + titulo + '\'' +
-                ", totalDeTemporadas=" + totalDeTemporadas +
+                ", totalTemporadas=" + totalTemporadas +
                 ", evaluacion=" + evaluacion +
                 ", sinopsis='" + sinopsis + '\'' +
                 ", poster='" + poster + '\'' +
@@ -75,12 +72,12 @@ public class Serie {
         this.titulo = titulo;
     }
 
-    public Integer getTotalDeTemporadas() {
-        return totalDeTemporadas;
+    public Integer getTotalTemporadas() {
+        return totalTemporadas;
     }
 
-    public void setTotalDeTemporadas(Integer totalDeTemporadas) {
-        this.totalDeTemporadas = totalDeTemporadas;
+    public void setTotalTemporadas(Integer totalTemporadas) {
+        this.totalTemporadas = totalTemporadas;
     }
 
     public Double getEvaluacion() {
