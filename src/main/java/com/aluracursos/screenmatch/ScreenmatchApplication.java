@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -23,6 +24,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	private SerieRepository repository;
 
 	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
 		SpringApplication.run(ScreenmatchApplication.class, args);
 	}
 
@@ -30,8 +32,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Principal principal = new Principal(repository);
 		principal.muestraElMenu();
-//		EjemploStreams ejemploStreams = new EjemploStreams();
-//		ejemploStreams.muestraEjemplo();
+
 	}
 }
 

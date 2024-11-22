@@ -174,8 +174,9 @@ public class Principal {
         var evaluacion = teclado.nextDouble();
         teclado.nextLine();
 
-        List<Serie> filtroSeries = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalTemporadas, evaluacion);
+        List<Serie> filtroSeries = repositorio.seriesPorTemporadaYEvaluacion(totalTemporadas,evaluacion);
         System.out.println("*** Series Filtradas ***");
-        filtroSeries.forEach(s -> System.out.println(s.getTitulo() + " - evaluación: " + s.getEvaluacion()));
+        filtroSeries.forEach(s ->
+                System.out.println(s.getTitulo() + " - evaluacion: " + s.getEvaluacion()));
     }
 }

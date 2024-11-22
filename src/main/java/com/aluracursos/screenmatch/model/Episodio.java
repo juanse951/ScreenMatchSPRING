@@ -2,7 +2,6 @@ package com.aluracursos.screenmatch.model;
 
 import jakarta.persistence.*;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -20,7 +19,7 @@ public class Episodio {
 
     private Integer numeroEpisodio;
 
-    private Double evalucion;
+    private Double evaluacion;
 
     private LocalDate fechaDeLanzamiento;
 
@@ -32,11 +31,11 @@ public class Episodio {
     public Episodio(Integer numero, DatosEpisodio d) {
         this.temporada = numero;
         this.titulo = d.titulo();
-        this.numeroEpisodio = Integer.valueOf(d.numeroEpisodio());
+        this.numeroEpisodio = d.numeroEpisodio();
         try {
-            this.evalucion = Double.valueOf(d.evaluaciones());
+            this.evaluacion = Double.valueOf(d.evaluacion());
         }catch (NumberFormatException e){
-            this.evalucion = 0.0;
+            this.evaluacion = 0.0;
         }
         try {
             this.fechaDeLanzamiento = LocalDate.parse(d.fechaDeLanzamiento());
@@ -77,12 +76,12 @@ public class Episodio {
         this.numeroEpisodio = numeroEpisodio;
     }
 
-    public Double getEvalucion() {
-        return evalucion;
+    public Double getEvaluacion() {
+        return evaluacion;
     }
 
-    public void setEvalucion(Double evalucion) {
-        this.evalucion = evalucion;
+    public void setEvaluacion(Double evaluacion) {
+        this.evaluacion = evaluacion;
     }
 
     public LocalDate getFechaDeLanzamiento() {
@@ -99,7 +98,7 @@ public class Episodio {
                 "temporada=" + temporada +
                 ", titulo='" + titulo + '\'' +
                 ", numeroEpisodio=" + numeroEpisodio +
-                ", evalucion=" + evalucion +
+                ", evaluacion=" + evaluacion +
                 ", fechaDeLanzamiento=" + fechaDeLanzamiento;
     }
 }

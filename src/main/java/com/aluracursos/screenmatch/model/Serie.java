@@ -36,7 +36,7 @@ public class Serie {
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
-        this.totalTemporadas = datosSerie.totalDeTemporadas();
+        this.totalTemporadas = datosSerie.totalTemporadas();
         this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
         this.sinopsis = datosSerie.sinopsis();
