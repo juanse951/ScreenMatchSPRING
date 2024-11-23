@@ -40,6 +40,7 @@ public class Principal {
                     5 - Top 5 mejores series
                     6 - Buscar series por categoria
                     7 - Filtrar series
+                    8 - Buscar episodios por titulo
                                   
                     0 - Salir
                     """;
@@ -68,6 +69,9 @@ public class Principal {
                     break;
                 case 7:
                     filtrarSeriesPorTemporadaYEvaluacion();
+                    break;
+                case 8:
+                    buscarEpisodiosPorTitulo();
                     break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -178,5 +182,14 @@ public class Principal {
         System.out.println("*** Series Filtradas ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + " - evaluacion: " + s.getEvaluacion()));
+    }
+
+    private void buscarEpisodiosPorTitulo(){
+        System.out.println("Escribe el nombre del episodios que deseas buscar: ");
+        var nombreEpisodio = teclado.nextLine();
+        List<Episodio> episodiosEncontrados = repositorio.episodiosPorNombre(nombreEpisodio);
+        episodiosEncontrados.forEach(e ->
+                System.out.printf("Serie: %s Temporada %s Episodio %s Evaluación %s\n",
+                        e.getSerie().getTitulo(), e.getTemporada(), e.getNumeroEpisodio(), e.getEvaluacion()));
     }
 }
