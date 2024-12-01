@@ -10,11 +10,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Locale;
 
 @SpringBootApplication
-public class ScreenmatchApplication {
+public class ScreenmatchApplicationConsola implements CommandLineRunner {
+
+	@Autowired
+	private SerieRepository repository;
 
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
-		SpringApplication.run(ScreenmatchApplication.class, args);
+		SpringApplication.run(ScreenmatchApplicationConsola.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		Principal principal = new Principal(repository);
+		principal.muestraElMenu();
+
 	}
 }
 
