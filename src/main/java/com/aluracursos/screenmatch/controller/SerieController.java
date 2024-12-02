@@ -18,8 +18,9 @@ public class SerieController {
     @GetMapping("/series")
     public List<SerieDTO> obtenerTodasLasSeries(){
         return repository.findAll().stream()
-                .map(s -> new SerieDTO(s.getTitulo(), s.getTotalTemporadas(), s.getEvaluacion(), s.getGenero(),
+                .map(s -> new SerieDTO(s.getId(), s.getTitulo(), s.getTotalTemporadas(), s.getEvaluacion(), s.getGenero(),
                         s.getSinopsis(), s.getPoster(), s.getActores()))
                 .collect(Collectors.toList());
     }
+
 }
