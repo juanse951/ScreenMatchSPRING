@@ -35,7 +35,7 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    1 - Buscar series 
+                    1 - Buscar series
                     2 - Buscar episodios
                     3 - Mostrar series buscadas
                     4 - Buscar series por titulo
@@ -44,9 +44,9 @@ public class Principal {
                     7 - Filtrar series
                     8 - Buscar episodios por titulo
                     9 - Top 5 episodios por Serie
-                                  
+                                 \s
                     0 - Salir
-                    """;
+                   \s""";
             System.out.println(menu);
             opcion = teclado.nextInt();
             teclado.nextLine();
@@ -99,7 +99,7 @@ public class Principal {
     }
     private void buscarEpisodioPorSerie() {
        mostrarSeriesBuscadas();
-        System.out.println("EScribe el nombre de la serie de la cual quieres ver los episodios: ");
+        System.out.println("Escribe el nombre de la serie de la cual quieres ver los episodios: ");
         var nombreSerie = teclado.nextLine();
 
         Optional<Serie> serie = series.stream()

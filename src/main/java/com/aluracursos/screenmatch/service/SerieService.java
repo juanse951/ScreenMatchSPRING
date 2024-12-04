@@ -18,14 +18,14 @@ public class SerieService {
     @Autowired
     private SerieRepository repository;
 
-    public List<SerieDTO> convierteDatos(List<Serie> serie){
+    public List<SerieDTO> convierteDatos(List<Serie> serie) {
         return serie.stream()
                 .map(s -> new SerieDTO(s.getId(), s.getTitulo(), s.getTotalTemporadas(), s.getEvaluacion(), s.getGenero(),
                         s.getSinopsis(), s.getPoster(), s.getActores()))
                 .collect(Collectors.toList());
     }
 
-    public List<SerieDTO> obtenerTodasLasSeries(){
+    public List<SerieDTO> obtenerTodasLasSeries() {
         return convierteDatos(repository.findAll());
     }
 
@@ -33,14 +33,14 @@ public class SerieService {
         return convierteDatos(repository.findTop5ByOrderByEvaluacionDesc());
     }
 
-    public List<SerieDTO> obtenerLanzamientosMasRecientes(){
+    public List<SerieDTO> obtenerLanzamientosMasRecientes() {
         return convierteDatos(repository.lanzamientosMasRecientes());
     }
 
     public SerieDTO obtenerPorId(Long id) {
         Optional<Serie> serie = repository.findById(id);
 
-        if(serie.isPresent()){
+        if (serie.isPresent()) {
             Serie s = serie.get();
             return new SerieDTO(s.getId(), s.getTitulo(), s.getTotalTemporadas(), s.getEvaluacion(), s.getGenero(),
                     s.getSinopsis(), s.getPoster(), s.getActores());
@@ -51,7 +51,7 @@ public class SerieService {
     public List<EpisodioDTO> obtenerTodasLasTemporadas(Long id) {
         Optional<Serie> serie = repository.findById(id);
 
-        if(serie.isPresent()){
+        if (serie.isPresent()) {
             Serie s = serie.get();
             return s.getEpisodios().stream()
                     .map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(),
@@ -61,7 +61,7 @@ public class SerieService {
     }
 
     public List<EpisodioDTO> obtenerTemporadasPorNumero(Long id, Long numeroTemporada) {
-        return repository.obtenerTemporadasPorNumero(id,numeroTemporada).stream()
+        return repository.obtenerTemporadasPorNumero(id, numeroTemporada).stream()
                 .map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(),
                         e.getNumeroEpisodio())).collect(Collectors.toList());
     }
@@ -70,4 +70,11 @@ public class SerieService {
         Categoria categoria = Categoria.fromEspanol(nombreGenero);
         return convierteDatos(repository.findByGenero(categoria));
     }
+
+    public List<EpisodioDTO> obtenerTop5EpisodiosWeb(Long id) {
+        return repository.top5EpisodiosWeb(id).stream()
+                .map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(),
+                        e.getNumeroEpisodio())).collect(Collectors.toList());
+    }
+
 }
